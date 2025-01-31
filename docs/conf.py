@@ -128,7 +128,7 @@ html_show_sphinx = False
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ["_static", "../figs"]
+html_static_path = ["_static"]
 
 # These paths are either relative to html_static_path or fully qualified paths (eg. https://...).
 # Increment query parameter to invalidate the cache.
@@ -153,7 +153,7 @@ latex_elements = {
 }
 
 # latex_logo = "../logo/crest-oceanrender-logomark512.png"
-latex_logo = "../figs/logo-free-white.png"
+latex_logo = "_static/logo.png"
 
 # -- Templating --------------------------------------------------------------
 
