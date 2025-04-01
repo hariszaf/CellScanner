@@ -41,17 +41,14 @@ def process_file(file: str, species_name: str, n_events: int, stain_1: Stain, st
     if 'Time' in df.columns:
         df = df.drop(columns=['Time'])  # Remove Time column
 
-    print("\n\n~~~~\n\nThis is stain1:")
-    print(stain_1)
-    print(".. and this is stain 2:")
-    print(stain_2)
-
     if stain_1.channel is None and stain_2.channel is None:
         print(f"No gating, no further processing before the training step for file: {file}")
         print(f"File is probably a blank. Is it? {species_name}")
 
     else:
+
         print(f"Gating file: {file}")
+
         # Apply gating
         with open(os.path.join(model_dir, "gating_input_data.txt"), "w") as f:
 

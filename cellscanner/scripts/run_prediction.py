@@ -123,12 +123,16 @@ def predict(PredictionPanel=None, **kwargs):
         print("Run gating...")
 
         # Apply gating
-        gating_df, all_labels = apply_gating(
-            data_df_pred,
-            stain1,
-            stain2,
-            extra_stains
-        )
+        try:
+            gating_df, all_labels = apply_gating(
+                data_df_pred,
+                stain1,
+                stain2,
+                extra_stains
+            )
+        except Exception as e:
+            raise ValueError(f"Gating failed for sample {sample}. Error: {e}") from e  # Preserve original traceback
+
         # Save gating results
         save_gating_results(
             gating_df, output_dir, sample,
