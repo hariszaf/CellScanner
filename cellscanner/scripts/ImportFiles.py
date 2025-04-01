@@ -178,9 +178,7 @@ class ImportFilePanel(QWidget):
 
             # Keep the numeric columns to be used in the TrainModelPanel in case user applies line gating
             _, _, numeric_columns, meta = load_fcs_file(original_files)
-            # channels_df = meta["_channels_"]
-            # channels_df["long_channel"] = channels_df.apply(lambda row: f"{row['$PnN']} [{row['$PnS']}]" if row["$PnN"] != row["$PnS"] else row["$PnN"], axis=1)
-            # self.channels = set(channels_df["long_channel"])
+
             self.channels = get_channels(meta["_channels_"])
             self.numeric_columns_set = set(numeric_columns)
 
@@ -223,6 +221,7 @@ class ImportFilePanel(QWidget):
         descr = "Directory with previously trained model. The folder needs to include all the following three files:  "
         trained_model_dir = QFileDialog.getExistingDirectory(self, "Set directory of previously trained model", descr)
         if trained_model_dir:
+            print("Loading model from files...")
             try:
                 self.model, self.scaler, self.le = load_model_from_files(trained_model_dir)
                 QMessageBox.information(self, "Model loading", "Model files loaded successfully.")

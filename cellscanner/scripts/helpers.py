@@ -59,7 +59,7 @@ def load_model_from_files(trained_model_dir):
                                 the user needs to make sure there are all three following files: "trained_model.keras", "scaler.pkl", "label_encoder.pkl"
     :raises ValueError: If any of the 3 required files is missing.
     """
-    print("Loading model from files")
+
     from tensorflow.keras.models import load_model
     import joblib
 
@@ -73,8 +73,7 @@ def load_model_from_files(trained_model_dir):
         return model, scaler, label_encoder
 
     except Exception as e:
-        print(f"Error loading model or preprocessing objects: {e}")
-        raise ValueError(f"No valid model directory. Check whether all 3 required files are there and valid.")
+        raise ValueError(f"No valid model directory. Check whether all 3 required files are there and valid.error: {e}") from e
 
 
 def create_file_path(output_dir, sample, name, extension):
@@ -173,7 +172,7 @@ def apply_gating(data_df: pd.DataFrame,
                 all_labels.append("cell")
 
             except Exception as e:
-                raise ValueError(f"Gating failed for stain1: {stain1.channel}") from e  # Preserve original traceback
+                raise ValueError(f"Gating failed for stain1: {stain1.channel}. Original error: {e}") from e
 
     if stain2.channel is not None:
         """ STAIN FOR LIVE / DEAD (PI) """

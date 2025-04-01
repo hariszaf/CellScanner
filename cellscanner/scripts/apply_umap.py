@@ -41,6 +41,11 @@ def process_file(file: str, species_name: str, n_events: int, stain_1: Stain, st
     if 'Time' in df.columns:
         df = df.drop(columns=['Time'])  # Remove Time column
 
+    print("\n\n~~~~\n\nThis is stain1:")
+    print(stain_1)
+    print(".. and this is stain 2:")
+    print(stain_2)
+
     if stain_1.channel is None and stain_2.channel is None:
         print(f"No gating, no further processing before the training step for file: {file}")
         print(f"File is probably a blank. Is it? {species_name}")
@@ -71,7 +76,7 @@ def process_file(file: str, species_name: str, n_events: int, stain_1: Stain, st
                 gating_condition = gated_df["cell"] == False
                 gating_condition = gating_condition.reindex(df.index, fill_value=False)
                 df = df[gating_condition]
-                # df = df[gated_df["dead"] == False]
+
                 f.write(f"number of entries after gating for stain1: {df.shape}\n")
 
             # Apply gating for stain 2 if channel is not None
@@ -79,7 +84,7 @@ def process_file(file: str, species_name: str, n_events: int, stain_1: Stain, st
                 gating_condition = gated_df["dead"] == True
                 gating_condition = gating_condition.reindex(df.index, fill_value=False)
                 df = df[gating_condition]
-                # df = df[gated_df["cell"] == True]
+
                 f.write(f"number of entries after gating for stain2: {df.shape}\n")
 
     # Keep a subset of the entries for the training part

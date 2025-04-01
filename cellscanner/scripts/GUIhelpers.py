@@ -367,6 +367,7 @@ def get_stains_from_panel(Panel):
 
     # Stain 2
     stain_2 = Panel.stain2_selector.combo.currentText()  # It should be the column name
+
     if stain_2 != NOT_APPLICABLE:
 
         match = re.search(r"\[(.*?)\]", stain_2)
