@@ -18,6 +18,7 @@ class AxisSelector(QWidget):
     """
     Box for the user to choose among the channels on the .fcs as the channel to be plotted in the 3D-plots.
     """
+
     def __init__(self, label_text, parent=None):
         super().__init__(parent)
         layout = QHBoxLayout(self)
@@ -26,6 +27,7 @@ class AxisSelector(QWidget):
         layout.addWidget(self.label)
         layout.addWidget(self.combo)
         self.setLayout(layout)  # Set the layout for this widget
+
     def set_items(self, items):
         self.combo.clear()
         self.combo.addItems(items)
@@ -36,6 +38,7 @@ class StainSelector(QWidget):
     Set of boxes for the user to choose among the channels on the .fcs as the channel to be used for a stain,
     its sign (>,<) and to set its value (an integer).
     """
+
     def __init__(self, label_text, tooltip_text, label, parent=None):
         super().__init__(parent)
         layout = QHBoxLayout(self)
@@ -81,6 +84,7 @@ class LabeledComboBox(QWidget):
         parent (QWidget, optional): The parent widget, if applicable.
 
     """
+
     def __init__(self, label_text, items=None, default=None, parent=None):
         super().__init__(parent)
 
@@ -130,6 +134,7 @@ class LabeledSpinBox(QWidget):
         default_value (int, optional): The default selected value in the spin box. Default is 0.
         parent (QWidget, optional): The parent widget, if applicable.
     """
+
     def __init__(self, label_text, min_value=0, max_value=1000, step=1, default_value=0, parent=None):
         super().__init__(parent)
 
@@ -191,6 +196,7 @@ class GatingMixin:
     This mixin defines the :func:`toggle_gating_options` method, which shows or hides
     UI elements related to gating based on the state of a checkbox.
     """
+
     def toggle_gating_options(self):
         """Displays or conceals gating options contingent on the gating checkbox state."""
         is_checked = self.gating_checkbox.isChecked()
@@ -222,6 +228,7 @@ class GatingCheckBox:
     """
 
     """
+
     def gating_checkbox(self):
         # Add a checkbox to apply gating
         self.gating_layout =  QVBoxLayout()
@@ -252,6 +259,7 @@ class LiveDeadDebrisSelectors:
     Mixin class to display the 2 basic stains for live/dead and cells/debris entries.
 
     """
+
     def basic_stains(self):
 
         # Pair of basic stains
@@ -367,7 +375,6 @@ def get_stains_from_panel(Panel):
 
     # Stain 2
     stain_2 = Panel.stain2_selector.combo.currentText()  # It should be the column name
-
     if stain_2 != NOT_APPLICABLE:
 
         match = re.search(r"\[(.*?)\]", stain_2)
@@ -419,7 +426,7 @@ def load_fcs_file(fcss):
 def button_style(
     font_size=12, padding=5, color="black", bck_col="#90EE90",
     bck_col_hov="#7FCF7F", bck_col_clicked="#72B572", radius=5
-    ):
+):
     """
     A button style
     :return style: A string that can be directly assigned as a button-style in PyQt5 apps.
